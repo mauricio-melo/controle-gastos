@@ -2,16 +2,19 @@ package com.santander.controlegastos.domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.santander.controlegastos.enumerators.TipoCategoria;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 import static javax.persistence.GenerationType.IDENTITY;
@@ -42,8 +45,9 @@ public class Lancamento implements Serializable{
     @Column(name = "valor", nullable = false)
     private BigDecimal valor;
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "data_lancamento", nullable = false)
-    private LocalDateTime data;
+    private Date data;
 
     @CreatedDate
     @Column(name = "data_criacao", updatable = false, nullable = false)
