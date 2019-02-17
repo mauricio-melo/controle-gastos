@@ -10,6 +10,7 @@ import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -48,5 +49,9 @@ public class LancamentoService {
 
     public List<LancamentoDTO> lancamentosPorUsuario(final Long idUsuario){
         return translate.toDTOList(repository.findByUsuario_idOrderByDataLancamentoDesc(idUsuario));
+    }
+
+    public List<LancamentoDTO> lancamentosUsuarioPorData(final Long idUsuario, final Date dataLancamento){
+        return translate.toDTOList(repository.findByUsuario_idAndDataLancamento(idUsuario, dataLancamento));
     }
 }

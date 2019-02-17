@@ -5,12 +5,14 @@ import com.santander.controlegastos.service.LancamentoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.Date;
 import java.util.List;
 
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
@@ -62,6 +64,14 @@ public class LancamentoResource {
     @ApiOperation(value = "Listando todos os lancamentos de determinado usuario", response = LancamentoDTO.class, responseContainer = "List")
     public ResponseEntity<List<LancamentoDTO>> lancamentosPorUsuario(@PathVariable("codigoUsuario") final Long idUsuario) {
         final List<LancamentoDTO> dtoList = service.lancamentosPorUsuario(idUsuario);
+        return ResponseEntity.ok(dtoList);
+    }
+
+    @GetMapping(path = "/usuario/{codigoUsuario}/{dataLancamento}", produces = APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Listando todos os lancamentos de determinado usuario em determinada data", response = LancamentoDTO.class, responseContainer = "List")
+    public ResponseEntity<List<LancamentoDTO>> lancamentosPorUsuario(@PathVariable("codigoUsuario") final Long idUsuario,
+                                                                     @PathVariable("dataLancamento") @DateTimeFormat(pattern="yyyy-MM-dd") final Date dataLancamento) {
+        final List<LancamentoDTO> dtoList = service.lancamentosUsuarioPorData(idUsuario, dataLancamento);
         return ResponseEntity.ok(dtoList);
     }
 }
