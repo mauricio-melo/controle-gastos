@@ -1,7 +1,7 @@
 package com.santander.controlegastos.domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.santander.controlegastos.enumerators.TipoCategoria;
+import com.santander.controlegastos.enumerators.Categoria;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -40,14 +40,14 @@ public class Lancamento implements Serializable{
 
     @Column(name = "tipo_categoria")
     @Enumerated(EnumType.STRING)
-    private TipoCategoria tipoCategoria;
+    private Categoria categoria;
 
     @Column(name = "valor", nullable = false)
     private BigDecimal valor;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "data_lancamento", nullable = false)
-    private Date data;
+    private Date dataLancamento;
 
     @CreatedDate
     @Column(name = "data_criacao", updatable = false, nullable = false)

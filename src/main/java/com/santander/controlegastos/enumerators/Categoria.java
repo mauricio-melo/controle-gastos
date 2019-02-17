@@ -1,6 +1,6 @@
 package com.santander.controlegastos.enumerators;
 
-public enum TipoCategoria {
+public enum Categoria {
     CASA,
     EDUCACAO,
     ELETRONICOS,

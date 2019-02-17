@@ -28,8 +28,8 @@ public class LancamentoService {
     private UsuarioTranslate usuarioTranslate;
 
     public LancamentoDTO save(@NonNull final LancamentoDTO dto){
-        Lancamento entity = translate.toEntity(dto);
-        entity.setUsuario(usuarioTranslate.toEntity(usuarioService.findById(dto.getIdUsuario())));
+        Lancamento entity = translate.toEntity1(dto);
+        entity.setUsuario(usuarioTranslate.toEntity(usuarioService.findById(dto.getCodigoUsuario())));
         return translate.toDTO(repository.save(entity));
     }
 
@@ -44,5 +44,9 @@ public class LancamentoService {
 
     public void delete(final Long id) {
         repository.deleteById(id);
+    }
+
+    public List<LancamentoDTO> lancamentosPorUsuario(final Long idUsuario){
+        return translate.toDTOList(repository.findByUsuario_idOrderByDataLancamentoDesc(idUsuario));
     }
 }

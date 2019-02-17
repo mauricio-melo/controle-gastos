@@ -57,4 +57,11 @@ public class LancamentoResource {
         service.delete(id);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping(path = "/usuario/{codigoUsuario}", produces = APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Listando todos os lancamentos de determinado usuario", response = LancamentoDTO.class, responseContainer = "List")
+    public ResponseEntity<List<LancamentoDTO>> lancamentosPorUsuario(@PathVariable("codigoUsuario") final Long idUsuario) {
+        final List<LancamentoDTO> dtoList = service.lancamentosPorUsuario(idUsuario);
+        return ResponseEntity.ok(dtoList);
+    }
 }

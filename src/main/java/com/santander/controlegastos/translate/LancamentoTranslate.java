@@ -10,27 +10,24 @@ import java.util.List;
 @Component
 public class LancamentoTranslate {
 
-    public Lancamento toEntity(LancamentoDTO dto) {
-        return toEntity(dto, Lancamento.builder().build());
-    }
-
-    public Lancamento toEntity(LancamentoDTO dto, Lancamento entity) {
-        entity.setId(dto.getId());
-        entity.setDescricao(dto.getDescricao());
-        entity.setTipoCategoria(dto.getTipoCategoria());
-        entity.setValor(dto.getValor());
-        entity.setData(dto.getData());
-        return entity;
+    public Lancamento toEntity1(LancamentoDTO dto){
+        return Lancamento.builder()
+                .id(dto.getId())
+                .descricao(dto.getDescricao())
+                .categoria(dto.getCategoria())
+                .valor(dto.getValor())
+                .dataLancamento(dto.getData())
+                .build();
     }
 
     public LancamentoDTO toDTO(Lancamento entity) {
         return LancamentoDTO.builder()
                 .id(entity.getId())
                 .descricao(entity.getDescricao())
-                .tipoCategoria(entity.getTipoCategoria())
+                .categoria(entity.getCategoria())
                 .valor(entity.getValor())
-                .data(entity.getData())
-                .idUsuario(entity.getUsuario().getId())
+                .data(entity.getDataLancamento())
+                .codigoUsuario(entity.getUsuario().getId())
                 .build();
     }
 
