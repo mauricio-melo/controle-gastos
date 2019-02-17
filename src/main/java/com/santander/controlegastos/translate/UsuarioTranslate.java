@@ -10,12 +10,15 @@ import java.util.List;
 @Component
 public class UsuarioTranslate {
 
-    public Usuario toEntity (UsuarioDTO dto){
-        return Usuario.builder()
-                .id(dto.getId())
-                .nome(dto.getNome())
-                .ativo(dto.getAtivo())
-                .build();
+    public Usuario toEntity(UsuarioDTO dto) {
+        return toEntity(dto, Usuario.builder().build());
+    }
+
+    public Usuario toEntity(UsuarioDTO dto, Usuario entity) {
+        entity.setId(dto.getId());
+        entity.setNome(dto.getNome());
+        entity.setAtivo(dto.getAtivo());
+        return entity;
     }
 
     public UsuarioDTO toDTO(Usuario entity) {

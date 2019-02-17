@@ -25,6 +25,11 @@ public class UsuarioService {
         return translate.toDTO(this.repository.save(entity));
     }
 
+    public UsuarioDTO update(@NonNull final UsuarioDTO dto){
+        Usuario entity = translate.toEntity(dto, translate.toEntity(findById(dto.getId())));
+        return translate.toDTO(repository.save(entity));
+    }
+
     public UsuarioDTO findById(final Long id) {
         return translate.toDTO(repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(id.toString())));

@@ -29,7 +29,13 @@ public class LancamentoService {
     private UsuarioTranslate usuarioTranslate;
 
     public LancamentoDTO save(@NonNull final LancamentoDTO dto){
-        Lancamento entity = translate.toEntity1(dto);
+        Lancamento entity = translate.toEntity(dto);
+        entity.setUsuario(usuarioTranslate.toEntity(usuarioService.findById(dto.getCodigoUsuario())));
+        return translate.toDTO(repository.save(entity));
+    }
+
+    public LancamentoDTO update(@NonNull final LancamentoDTO dto){
+        Lancamento entity = translate.toEntity(dto, translate.toEntity(findById(dto.getId())));
         entity.setUsuario(usuarioTranslate.toEntity(usuarioService.findById(dto.getCodigoUsuario())));
         return translate.toDTO(repository.save(entity));
     }

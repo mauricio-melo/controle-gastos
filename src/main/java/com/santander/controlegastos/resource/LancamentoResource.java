@@ -30,13 +30,20 @@ public class LancamentoResource {
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Criação de um novo recurso", responseReference = "Novo recurso criado")
     public ResponseEntity<Void> create(@Valid @RequestBody final LancamentoDTO dto) {
-        final LancamentoDTO LancamentoDTO = service.save(dto);
+        final LancamentoDTO lancamentoDTO = service.save(dto);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(LancamentoDTO.getId())
+                .buildAndExpand(lancamentoDTO.getId())
                 .toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @PutMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Atualização de um recurso lancamento", responseReference = "Recurso atualizado com sucesso.")
+    public ResponseEntity<LancamentoDTO> update(@Valid @RequestBody final LancamentoDTO dto) {
+        final LancamentoDTO lancamentoDTO = service.update(dto);
+        return ResponseEntity.ok(lancamentoDTO);
     }
 
     @GetMapping(path = "/{id}", produces = APPLICATION_JSON_VALUE)

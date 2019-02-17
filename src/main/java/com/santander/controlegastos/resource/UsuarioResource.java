@@ -37,6 +37,13 @@ public class UsuarioResource {
         return ResponseEntity.created(uri).build();
     }
 
+    @PutMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Atualização de um recurso lancamento", responseReference = "Recurso atualizado com sucesso.")
+    public ResponseEntity<UsuarioDTO> update(@Valid @RequestBody final UsuarioDTO dto) {
+        final UsuarioDTO usuarioDTO = service.update(dto);
+        return ResponseEntity.ok(usuarioDTO);
+    }
+
     @GetMapping(path = "/{id}", produces = APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Pesquisando por um recurso em específico", response = UsuarioDTO.class)
     public ResponseEntity<UsuarioDTO> findById(@PathVariable final Long id) {
