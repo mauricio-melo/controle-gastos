@@ -17,7 +17,7 @@ CREATE TABLE categoria (
 CREATE TABLE lancamento (
     id_lancamento BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
     descricao VARCHAR(255) NOT NULL,
-    id_categoria BIGINT(20) NOT NULL,
+    id_categoria BIGINT(20) NULL,
     valor DECIMAL(10,2) NOT NULL,
     data_lancamento DATE NOT NULL,
     data_criacao DATETIME NOT NULL,

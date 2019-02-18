@@ -1,5 +1,6 @@
 package com.santander.controlegastos.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,10 +11,13 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(NON_EMPTY)
 public class LancamentoDTO {
 
     @ApiModelProperty(notes = "Id do lancamento", example = "1")
@@ -23,7 +27,6 @@ public class LancamentoDTO {
     @ApiModelProperty(notes = "Descrição do lancamento", example = "Carrefour", required = true, position = 1)
     private String descricao;
 
-    @NotNull(message = "Campo \"codigoCategoria\" precisa ser informado.")
     @ApiModelProperty(notes = "Codigo da categoria do lancamento", example = "1", position = 2)
     private Long codigoCategoria;
 

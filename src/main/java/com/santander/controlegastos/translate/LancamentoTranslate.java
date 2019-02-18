@@ -23,14 +23,19 @@ public class LancamentoTranslate {
     }
 
     public LancamentoDTO toDTO(Lancamento entity) {
-        return LancamentoDTO.builder()
-                .id(entity.getId())
-                .descricao(entity.getDescricao())
-                .codigoCategoria(entity.getCategoria().getId())
-                .valor(entity.getValor())
-                .data(entity.getDataLancamento())
-                .codigoUsuario(entity.getUsuario().getId())
-                .build();
+        return toDTO(entity, LancamentoDTO.builder().build());
+    }
+
+    public LancamentoDTO toDTO(Lancamento entity, LancamentoDTO dto) {
+        dto.setId(entity.getId());
+        dto.setDescricao(entity.getDescricao());
+        if(entity.getCategoria() != null){
+            dto.setCodigoCategoria(entity.getCategoria().getId());
+        }
+        dto.setValor(entity.getValor());
+        dto.setData(entity.getDataLancamento());
+        dto.setCodigoUsuario(entity.getUsuario().getId());
+        return dto;
     }
 
     public List<LancamentoDTO> toDTOList(List<Lancamento> entityList) {

@@ -37,9 +37,18 @@ public class LancamentoService {
 
     public LancamentoDTO save(@NonNull final LancamentoDTO dto){
         Lancamento entity = translate.toEntity(dto);
+        if(dto.getCodigoCategoria() != null){
+            entity.setCategoria(categoriaTranslate.toEntity(categoriaService.findById(dto.getCodigoCategoria())));
+        }
         entity.setUsuario(usuarioTranslate.toEntity(usuarioService.findById(dto.getCodigoUsuario())));
-        entity.setCategoria(categoriaTranslate.toEntity(categoriaService.findById(dto.getCodigoCategoria())));
-        return translate.toDTO(repository.save(entity));
+        entity = repository.save(entity);
+        LancamentoDTO lancamentoDTO = translate.toDTO(entity);
+
+        if(entity.getCategoria() != null){
+            lancamentoDTO.setCodigoCategoria(entity.getCategoria().getId());
+        }
+
+        return lancamentoDTO;
     }
 
     public LancamentoDTO update(@NonNull final LancamentoDTO dto){
