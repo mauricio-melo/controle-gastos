@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,7 +30,8 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @ActiveProfiles("test")
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-public class AbstractTest {
+@Ignore
+public class TestBase {
 
     protected MockMvc mvc;
 
@@ -46,9 +49,16 @@ public class AbstractTest {
                 .configure(IGNORE_UNKNOWN, true);
     }
 
-    protected void setUp() {
+    @Before
+    public void setUp() {
         mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
+
+//    @Before
+//    public void setUp () {
+//        this.mockMvc = webAppContextSetup(this.context).addFilters(this.filters).build();
+//    }
+
 
     public static <T> T createMockFromFile (final String fileName, final Class<T> resultClass)
             throws IOException {

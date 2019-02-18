@@ -1,43 +1,34 @@
 package com.santander.controlegastos.resource;
 
 import com.santander.controlegastos.base.TestBase;
-import com.santander.controlegastos.dto.CategoriaDTO;
-import com.santander.controlegastos.repository.CategoriaRepository;
-import com.santander.controlegastos.service.CategoriaService;
+import com.santander.controlegastos.dto.UsuarioDTO;
+import com.santander.controlegastos.repository.UsuarioRepository;
+import com.santander.controlegastos.service.UsuarioService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.text.IsEmptyString.isEmptyOrNullString;
 import static org.junit.Assert.assertEquals;
-import static junit.framework.TestCase.assertTrue;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class CategoriaResourceTests extends TestBase {
+public class UsuarioResourceTests extends TestBase {
 
     @Autowired
-    private CategoriaRepository repository;
+    private UsuarioRepository repository;
 
     @Autowired
-    private CategoriaService service;
+    private UsuarioService service;
 
     @Test
     public void findAll() throws Exception{
-        super.mvc.perform(MockMvcRequestBuilders.get(CategoriaResource.CATEGORIA_ENDPOINT))
-                .andExpect(status().is2xxSuccessful())
-                .andExpect(jsonPath("$", not(empty())))
-                .andDo(print());
-    }
-
-    @Test
-    public void search() throws Exception{
-        super.mvc.perform(MockMvcRequestBuilders.get(CategoriaResource.CATEGORIA_ENDPOINT + "/search")
-                .param("name", "tr"))
+        super.mvc.perform(MockMvcRequestBuilders.get(UsuarioResource.USUARIO_ENDPOINT))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$", not(empty())))
                 .andDo(print());
@@ -45,7 +36,7 @@ public class CategoriaResourceTests extends TestBase {
 
     @Test
     public void findById () throws Exception {
-        super.mvc.perform(MockMvcRequestBuilders.get(CategoriaResource.CATEGORIA_ENDPOINT + "/{id}", 1))
+        super.mvc.perform(MockMvcRequestBuilders.get(UsuarioResource.USUARIO_ENDPOINT + "/{id}", 1))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$.id", not(isEmptyOrNullString())))
                 .andDo(print());
@@ -53,7 +44,7 @@ public class CategoriaResourceTests extends TestBase {
 
     @Test
     public void findByIdWithIdInvalid () throws Exception {
-        super.mvc.perform(MockMvcRequestBuilders.get(CategoriaResource.CATEGORIA_ENDPOINT + "/{id}", 100))
+        super.mvc.perform(MockMvcRequestBuilders.get(UsuarioResource.USUARIO_ENDPOINT + "/{id}", 100))
                 .andExpect(status().is4xxClientError())
                 .andDo(print());
     }
@@ -61,8 +52,8 @@ public class CategoriaResourceTests extends TestBase {
     @Test
     public void save () throws Exception {
         final long countBeforeSave = repository.count();
-        final CategoriaDTO mock = createMockFromFile("json/categoria/categoria", CategoriaDTO.class);
-        super.mvc.perform(MockMvcRequestBuilders.post(CategoriaResource.CATEGORIA_ENDPOINT)
+        final UsuarioDTO mock = createMockFromFile("json/usuario/usuario", UsuarioDTO.class);
+        super.mvc.perform(MockMvcRequestBuilders.post(UsuarioResource.USUARIO_ENDPOINT)
                 .contentType(APPLICATION_JSON)
                 .content(MAPPER.writeValueAsString(mock)))
                 .andExpect(status().is2xxSuccessful())
@@ -73,15 +64,15 @@ public class CategoriaResourceTests extends TestBase {
 
     @Test
     public void update () throws Exception {
-        final CategoriaDTO beforeUpdate = service.findById(9L);
-        final CategoriaDTO mock = createMockFromFile("json/categoria/categoriaUpdate", CategoriaDTO.class);
-        super.mvc.perform(MockMvcRequestBuilders.put(CategoriaResource.CATEGORIA_ENDPOINT)
+        final UsuarioDTO beforeUpdate = service.findById(3L);
+        final UsuarioDTO mock = createMockFromFile("json/usuario/usuarioUpdate", UsuarioDTO.class);
+        super.mvc.perform(MockMvcRequestBuilders.put(UsuarioResource.USUARIO_ENDPOINT)
                 .contentType(APPLICATION_JSON)
                 .content(MAPPER.writeValueAsString(mock)))
                 .andExpect(status().is2xxSuccessful())
                 .andDo(print());
 
-        final CategoriaDTO afterUpdate = service.findById(9L);
+        final UsuarioDTO afterUpdate = service.findById(3L);
 
         assertTrue(beforeUpdate.getNome() != afterUpdate.getNome());
     }
@@ -89,7 +80,7 @@ public class CategoriaResourceTests extends TestBase {
     @Test
     public void remove () throws Exception {
         final long countBeforeSave = repository.count();
-        super.mvc.perform(MockMvcRequestBuilders.delete(CategoriaResource.CATEGORIA_ENDPOINT + "/{id}", 8)
+        super.mvc.perform(MockMvcRequestBuilders.delete(UsuarioResource.USUARIO_ENDPOINT + "/{id}", 4)
                 .contentType(APPLICATION_JSON))
                 .andExpect(status().is2xxSuccessful())
                 .andDo(print());

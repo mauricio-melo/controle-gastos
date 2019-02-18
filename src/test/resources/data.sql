@@ -8,6 +8,9 @@ values ('Francisco José', '2018-12-27 15:45:00', 1);
 insert into usuario (nome, data_criacao, flg_ativo)
 values ('Mariana Ribeiro', '2018-12-27 15:45:00', 1);
 
+insert into usuario (nome, data_criacao, flg_ativo)
+values ('Mariana Ribeiro de Melo', '2018-12-27 15:45:00', 1);
+
 insert into categoria (nome, data_criacao, flg_ativo)
 values ('ALIMENTACAO', '2018-12-27 15:45:00', 1);
 
