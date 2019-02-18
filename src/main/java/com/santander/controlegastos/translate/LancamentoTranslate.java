@@ -17,7 +17,6 @@ public class LancamentoTranslate {
     public Lancamento toEntity(LancamentoDTO dto, Lancamento entity) {
         entity.setId(dto.getId());
         entity.setDescricao(dto.getDescricao());
-        entity.setCategoria(dto.getCategoria());
         entity.setValor(dto.getValor());
         entity.setDataLancamento(dto.getData());
         return entity;
@@ -27,7 +26,7 @@ public class LancamentoTranslate {
         return LancamentoDTO.builder()
                 .id(entity.getId())
                 .descricao(entity.getDescricao())
-                .categoria(entity.getCategoria())
+                .codigoCategoria(entity.getCategoria().getId())
                 .valor(entity.getValor())
                 .data(entity.getDataLancamento())
                 .codigoUsuario(entity.getUsuario().getId())

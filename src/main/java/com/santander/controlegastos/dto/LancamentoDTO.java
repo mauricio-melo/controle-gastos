@@ -1,6 +1,5 @@
 package com.santander.controlegastos.dto;
 
-import com.santander.controlegastos.enumerators.Categoria;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,9 +23,9 @@ public class LancamentoDTO {
     @ApiModelProperty(notes = "Descrição do lancamento", example = "Carrefour", required = true, position = 1)
     private String descricao;
 
-    @NotNull(message = "Campo \"categoria\" precisa ser informado.")
-    @ApiModelProperty(notes = "Categoria do lancamento", example = "SUPERMERCADO", position = 2)
-    private Categoria categoria;
+    @NotNull(message = "Campo \"codigoCategoria\" precisa ser informado.")
+    @ApiModelProperty(notes = "Codigo da categoria do lancamento", example = "1", position = 2)
+    private Long codigoCategoria;
 
     @NotNull(message = "Campo \"valor\" precisa ser informado.")
     @ApiModelProperty(notes = "Valor do lancamento", example = "120.30", required = true, position = 3)

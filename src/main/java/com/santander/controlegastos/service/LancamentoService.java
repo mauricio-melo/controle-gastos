@@ -4,6 +4,7 @@ import com.santander.controlegastos.domain.Lancamento;
 import com.santander.controlegastos.dto.LancamentoDTO;
 import com.santander.controlegastos.exception.ResourceNotFoundException;
 import com.santander.controlegastos.repository.LancamentoRepository;
+import com.santander.controlegastos.translate.CategoriaTranslate;
 import com.santander.controlegastos.translate.LancamentoTranslate;
 import com.santander.controlegastos.translate.UsuarioTranslate;
 import lombok.NonNull;
@@ -28,15 +29,23 @@ public class LancamentoService {
     @Autowired
     private UsuarioTranslate usuarioTranslate;
 
+    @Autowired
+    private CategoriaService categoriaService;
+
+    @Autowired
+    private CategoriaTranslate categoriaTranslate;
+
     public LancamentoDTO save(@NonNull final LancamentoDTO dto){
         Lancamento entity = translate.toEntity(dto);
         entity.setUsuario(usuarioTranslate.toEntity(usuarioService.findById(dto.getCodigoUsuario())));
+        entity.setCategoria(categoriaTranslate.toEntity(categoriaService.findById(dto.getCodigoCategoria())));
         return translate.toDTO(repository.save(entity));
     }
 
     public LancamentoDTO update(@NonNull final LancamentoDTO dto){
         Lancamento entity = translate.toEntity(dto, translate.toEntity(findById(dto.getId())));
         entity.setUsuario(usuarioTranslate.toEntity(usuarioService.findById(dto.getCodigoUsuario())));
+        entity.setCategoria(categoriaTranslate.toEntity(categoriaService.findById(dto.getCodigoCategoria())));
         return translate.toDTO(repository.save(entity));
     }
 

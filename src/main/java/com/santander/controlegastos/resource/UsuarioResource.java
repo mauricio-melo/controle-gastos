@@ -16,7 +16,7 @@ import java.util.List;
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
 @RestController
-@RequestMapping("/usuario")
+@RequestMapping(UsuarioResource.USUARIO_ENDPOINT)
 @Api(value = "Usuario", description = "Operações disponiveis")
 public class UsuarioResource {
 
@@ -38,7 +38,7 @@ public class UsuarioResource {
     }
 
     @PutMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Atualização de um recurso lancamento", responseReference = "Recurso atualizado com sucesso.")
+    @ApiOperation(value = "Atualização de um recurso usuario", responseReference = "Recurso atualizado com sucesso.")
     public ResponseEntity<UsuarioDTO> update(@Valid @RequestBody final UsuarioDTO dto) {
         final UsuarioDTO usuarioDTO = service.update(dto);
         return ResponseEntity.ok(usuarioDTO);

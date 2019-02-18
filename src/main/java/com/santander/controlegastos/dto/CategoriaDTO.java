@@ -12,16 +12,18 @@ import javax.validation.constraints.NotNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UsuarioDTO {
+public class CategoriaDTO {
 
-    @ApiModelProperty(notes = "Id do usuario", example = "1")
+    @ApiModelProperty(notes = "Id do lancamento", example = "1")
     private Long id;
 
     @NotNull(message = "Campo \"nome\" precisa ser informado.")
-    @ApiModelProperty(notes = "Nome do usuario", example = "José Bezerra", required = true, position = 1)
+    @ApiModelProperty(notes = "Nome da categoria", example = "ALIMENTACAO", required = true, position = 1)
     private String nome;
 
     @NotNull(message = "Campo \"descricao\" precisa ser informado.")
-    @ApiModelProperty(notes = "Situação do usuario", example = "true", required = true, position = 1)
+    @ApiModelProperty(notes = "Situação da categoria", example = "true", required = true, position = 1)
     private Boolean ativo;
+
+
 }
