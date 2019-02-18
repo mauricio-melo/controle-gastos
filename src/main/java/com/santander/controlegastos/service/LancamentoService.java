@@ -58,7 +58,7 @@ public class LancamentoService {
 
     public LancamentoDTO findById(final Long id) {
         return translate.toDTO(repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(id.toString())));
+                .orElseThrow(() -> new ResourceNotFoundException("Lancamento", "id", id)));
     }
 
     public List<LancamentoDTO> findAll() {

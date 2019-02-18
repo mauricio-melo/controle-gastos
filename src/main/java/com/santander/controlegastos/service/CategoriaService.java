@@ -32,7 +32,7 @@ public class CategoriaService {
 
     public CategoriaDTO findById(final Long id) {
         return translate.toDTO(repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(id.toString())));
+                .orElseThrow(() -> new ResourceNotFoundException("Categoria", "id", id)));
     }
 
     public List<CategoriaDTO> findAll() {

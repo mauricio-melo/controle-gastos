@@ -32,7 +32,7 @@ public class UsuarioService {
 
     public UsuarioDTO findById(final Long id) {
         return translate.toDTO(repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(id.toString())));
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario", "id", id)));
     }
 
     public List<UsuarioDTO> findAll() {
