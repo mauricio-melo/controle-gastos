@@ -41,14 +41,12 @@ public class LancamentoService {
             entity.setCategoria(categoriaTranslate.toEntity(categoriaService.findById(dto.getCodigoCategoria())));
         }
         entity.setUsuario(usuarioTranslate.toEntity(usuarioService.findById(dto.getCodigoUsuario())));
-        entity = repository.save(entity);
-        LancamentoDTO lancamentoDTO = translate.toDTO(entity);
 
-        if(entity.getCategoria() != null){
-            lancamentoDTO.setCodigoCategoria(entity.getCategoria().getId());
+        Lancamento lancamento = repository.findByDescricao(dto.getDescricao());
+        if(lancamento != null){
+            entity.setCategoria(lancamento.getCategoria());
         }
-
-        return lancamentoDTO;
+        return translate.toDTO(repository.save(entity));
     }
 
     public LancamentoDTO update(@NonNull final LancamentoDTO dto){
