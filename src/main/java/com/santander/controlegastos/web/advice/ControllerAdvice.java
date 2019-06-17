@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.persistence.EntityNotFoundException;
 
+import java.util.NoSuchElementException;
+
 import static java.time.Instant.now;
 import static java.util.Arrays.asList;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
@@ -29,7 +31,7 @@ public class ControllerAdvice {
                 .body(this.constructErrorResponse(INTERNAL_SERVER_ERROR, Messages.SERVER_ERROR.getMessage()));
     }
 
-    @ExceptionHandler({ResourceNotFoundException.class, EmptyResultDataAccessException.class, EntityNotFoundException.class})
+    @ExceptionHandler({ResourceNotFoundException.class, EmptyResultDataAccessException.class, EntityNotFoundException.class, NoSuchElementException.class})
     public ResponseEntity<ErrorResponse> handleResourceNotFound(final Exception e) {
         return status(NOT_FOUND)
                 .body(this.constructErrorResponse(NOT_FOUND, Messages.RESOURCE_NOT_FOUND.getMessage()));

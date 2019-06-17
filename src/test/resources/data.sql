@@ -8,6 +8,9 @@ values ('Francisco José', '2018-06-13 15:45:00', 1);
 insert into user (nam_user, dat_creation, flg_enabled)
 values ('Mariana Ribeiro', '2018-06-13 15:45:00', 1);
 
+insert into user (nam_user, dat_creation, flg_enabled)
+values ('Ana Ribeiro', '2018-06-13 15:45:00', 1);
+
 insert into category (nam_category, dat_creation, flg_enabled)
 values ('ALIMENTACAO', '2018-06-13 15:45:00', 1);
 
@@ -49,3 +52,6 @@ values ('FastShop', 4, 2, 399.99, '2018-06-13', '2018-06-13 15:45:00');
 
 insert into entry (description, id_category, id_user, amount, dat_entry, dat_creation)
 values ('Papelaria', 6, 2, 1.99, '2018-06-13', '2018-06-13 15:45:00');
+
+insert into entry (description, id_category, id_user, amount, dat_entry, dat_creation)
+values ('Nike', 9, 2, 429.99, '2018-06-13', '2018-06-13 15:45:00');

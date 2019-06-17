@@ -1,7 +1,7 @@
 {
-  "descricao": "Remedio",
-  "codigoCategoria": 7,
-  "valor": 120.3,
-  "data": "2018-12-27",
-  "codigoUsuario": 1
+  "description": "Remedio",
+  "categoryId": 7,
+  "amount": 120.3,
+  "entryDate": "2018-12-27",
+  "userId": 1
 }

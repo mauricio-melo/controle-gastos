@@ -30,8 +30,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @ActiveProfiles("test")
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-@Ignore
-public class TestBase {
+public abstract class TestBase {
 
     protected MockMvc mvc;
 
@@ -40,7 +39,7 @@ public class TestBase {
     protected static final ObjectMapper MAPPER;
 
     @Autowired
-    WebApplicationContext webApplicationContext;
+    protected WebApplicationContext webApplicationContext;
 
     static {
         MAPPER = new ObjectMapper()

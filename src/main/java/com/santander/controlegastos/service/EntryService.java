@@ -39,9 +39,10 @@ public class EntryService {
         return this.mapper.toDTO(this.repository.save(entry));
     }
 
-    public EntryDTO update(final Long id, final EntryDTO entryDTO) {
+    public EntryDTO update(final Long id, final EntryDTO entryDTO, Long userId, Long categoryId) {
         final Entry entry = this.mapper.toEntity(this.findById(id));
-        entry.setCategory(this.categoryMapper.toEntity(this.categoryService.findById(entryDTO.getCategory().getId())));
+        entry.setCategory(this.categoryMapper.toEntity(this.categoryService.findById(categoryId)));
+        entry.setUser(this.userMapper.toEntity(this.userService.findById(userId)));
         entry.setDescription(entryDTO.getDescription());
         entry.setAmount(entryDTO.getAmount());
         entry.setEntryDate(entryDTO.getEntryDate());
@@ -50,7 +51,7 @@ public class EntryService {
 
     public EntryDTO findById(final Long id){
         return this.mapper.toDTO(
-                Optional.of(this.repository.getOne(id))
+                Optional.of(this.repository.findById(id).get())
                         .orElseThrow(() -> new ResourceNotFoundException(id.toString())));
     }
 

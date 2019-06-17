@@ -1,6 +1,6 @@
 {
-  "descricao": "Carrefour",
-  "valor": 120.35,
-  "data": "2018-12-27",
-  "codigoUsuario": 1
+  "description": "Mc Donalds",
+  "amount": 20.35,
+  "entryDate": "2018-12-27",
+  "userId": 1
 }

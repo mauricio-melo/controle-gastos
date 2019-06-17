@@ -1,9 +1,10 @@
-package com.santander.controlegastos.resource;
+package com.santander.controlegastos.controller;
 
 import com.santander.controlegastos.base.TestBase;
 import com.santander.controlegastos.dto.UserDTO;
 import com.santander.controlegastos.repository.UserRepository;
 import com.santander.controlegastos.service.UserService;
+import com.santander.controlegastos.vo.UserVO;
 import com.santander.controlegastos.web.controller.UserController;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class UserResourceTests extends TestBase {
+public class UserControllerTests extends TestBase {
 
     @Autowired
     private UserRepository repository;
@@ -66,8 +67,8 @@ public class UserResourceTests extends TestBase {
     @Test
     public void update () throws Exception {
         final UserDTO beforeUpdate = service.findById(3L);
-        final UserDTO mock = createMockFromFile("json/user/user", UserDTO.class);
-        super.mvc.perform(MockMvcRequestBuilders.put(UserController.USER_ENDPOINT)
+        final UserVO mock = createMockFromFile("json/user/user", UserVO.class);
+        super.mvc.perform(MockMvcRequestBuilders.put(UserController.USER_ENDPOINT + "/{id}", 3)
                 .contentType(APPLICATION_JSON)
                 .content(MAPPER.writeValueAsString(mock)))
                 .andExpect(status().is2xxSuccessful())

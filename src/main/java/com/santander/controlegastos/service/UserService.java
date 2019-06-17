@@ -32,7 +32,7 @@ public class UserService {
 
     public UserDTO findById(final Long id){
         return this.mapper.toDTO(
-                Optional.of(this.repository.getOne(id))
+                Optional.of(this.repository.findById(id).get())
                         .orElseThrow(() -> new ResourceNotFoundException(id.toString())));
     }
 

@@ -1,9 +1,10 @@
-package com.santander.controlegastos.resource;
+package com.santander.controlegastos.controller;
 
 import com.santander.controlegastos.base.TestBase;
 import com.santander.controlegastos.dto.CategoryDTO;
 import com.santander.controlegastos.repository.CategoryRepository;
 import com.santander.controlegastos.service.CategoryService;
+import com.santander.controlegastos.vo.CategoryVO;
 import com.santander.controlegastos.web.controller.CategoryController;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class CategoryResourceTests extends TestBase {
+public class CategoryControllerTests extends TestBase {
 
     @Autowired
     private CategoryRepository repository;
@@ -62,7 +63,7 @@ public class CategoryResourceTests extends TestBase {
     @Test
     public void save () throws Exception {
         final long countBeforeSave = repository.count();
-        final CategoryDTO mock = createMockFromFile("json/categoria/categoria", CategoryDTO.class);
+        final CategoryVO mock = createMockFromFile("json/category/category", CategoryVO.class);
         super.mvc.perform(MockMvcRequestBuilders.post(CategoryController.CATEGORY_ENDPOINT)
                 .contentType(APPLICATION_JSON)
                 .content(MAPPER.writeValueAsString(mock)))
@@ -75,8 +76,8 @@ public class CategoryResourceTests extends TestBase {
     @Test
     public void update () throws Exception {
         final CategoryDTO beforeUpdate = service.findById(9L);
-        final CategoryDTO mock = createMockFromFile("json/category/categoryUpdate", CategoryDTO.class);
-        super.mvc.perform(MockMvcRequestBuilders.put(CategoryController.CATEGORY_ENDPOINT)
+        final CategoryVO mock = createMockFromFile("json/category/categoryUpdate", CategoryVO.class);
+        super.mvc.perform(MockMvcRequestBuilders.put(CategoryController.CATEGORY_ENDPOINT + "/{id}", 9L)
                 .contentType(APPLICATION_JSON)
                 .content(MAPPER.writeValueAsString(mock)))
                 .andExpect(status().is2xxSuccessful())

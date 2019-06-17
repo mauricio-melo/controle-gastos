@@ -47,7 +47,7 @@ public class EntryController {
     @ApiOperation(value = "Updating a entry", responseReference = "200 = Resource updated")
     public ResponseEntity<EntryDTO> update(@Valid @RequestBody final EntryVO vo,
                                            @Valid @PathVariable("id") final Long id) {
-        final EntryDTO dto = this.service.update(id, this.entryMapper.voToDTO(vo));
+        final EntryDTO dto = this.service.update(id, this.entryMapper.voToDTO(vo),vo.getUserId(), vo.getCategoryId());
         return ResponseEntity.ok(dto);
     }
 
