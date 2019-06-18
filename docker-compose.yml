@@ -1,10 +1,23 @@
-db:
-    image: mysql:5.7
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_DATABASE: "controle_gastos"
-      MYSQL_ROOT_PASSWORD: "root"
-      MYSQL_USER: "control_adm"
-      MYSQL_PASSWORD: "control_adm"
-      MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+#
+#version: '3.3'
+#services:
+#  db:
+#    image: mysql:5.7
+#    restart: always
+#    environment:
+#      MYSQL_DATABASE: 'controle_gastos'
+#      MYSQL_ROOT_PASSWORD: 'root'
+#    ports:
+#      - '3306:3306'
+#    expose:
+#      - '3306'
+#    volumes:
+#      - my-db:/var/lib/mysql
+#  controle-gastos:
+#    build:
+#      context: .
+#    container_name: controle-gastos-app
+#    ports:
+#      - "9401:8080"
+#volumes:
+#  my-db:
