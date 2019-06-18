@@ -1,3 +1,12 @@
+db:
+  image: mysql:5.7
+  ports:
+    - "3306:3306"
+  environment:
+    MYSQL_DATABASE: "controle_gastos"
+    MYSQL_ROOT_PASSWORD: "root"
+    MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+
 #
 #version: '3.3'
 #services:
